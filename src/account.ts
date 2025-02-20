@@ -30,7 +30,7 @@ export class Account extends vscode.TreeItem {
         this.key = collection.account;
         this.type = collection.type;
         this.contextValue = this.type;
-        this.command = {command: 'rss.select', title: 'select', arguments: [this.key]};
+        this.command = {command: 'rss-plus.select', title: 'select', arguments: [this.key]};
 
         const ids = collection.getArticleList();
         const unread_num = ids.length === 0 ? 0

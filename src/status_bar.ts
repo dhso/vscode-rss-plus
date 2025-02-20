@@ -11,7 +11,7 @@ export class StatusBar {
 
     public init() {
         App.instance.context.subscriptions.push(
-            vscode.commands.registerCommand('rss.read-notification', async () => {
+            vscode.commands.registerCommand('rss-plus.read-notification', async () => {
                 if (!this.read_state) {
                     return;
                 }
@@ -62,9 +62,9 @@ export class StatusBar {
                     if (max_len && title.length > max_len) {
                         title = title.substr(0, max_len - 3) + '...';
                     }
-                    this.status_bar_item.text = '$(rss) ' + title;
+                    this.status_bar_item.text = '$(rss-plus) ' + title;
                     this.status_bar_item.tooltip = abs.title;
-                    this.status_bar_item.command = 'rss.read-notification',
+                    this.status_bar_item.command = 'rss-plus.read-notification',
                     this.read_state = [account, abs];
                     this.index = (i + 1) % this.unread_list.length;
                     break;

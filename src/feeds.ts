@@ -63,7 +63,7 @@ export class Feed extends vscode.TreeItem {
         unread_num: number,
     ) {
         super(summary.title);
-        this.command = {command: 'rss.articles', title: 'articles', arguments: [feed]};
+        this.command = {command: 'rss-plus.articles', title: 'articles', arguments: [feed]};
         this.contextValue = 'feed';
 
         if (unread_num > 0) {
@@ -80,7 +80,7 @@ export class Feed extends vscode.TreeItem {
 class Unread extends vscode.TreeItem {
     constructor(unread_num: number)  {
         super(`You have ${unread_num} unread article${unread_num > 1 ? 's' : ''}`);
-        this.command = {command: 'rss.articles', title: 'articles', arguments: ['<unread>']};
+        this.command = {command: 'rss-plus.articles', title: 'articles', arguments: ['<unread>']};
         this.contextValue = 'unread';
         this.iconPath = new vscode.ThemeIcon('bell-dot');
     }

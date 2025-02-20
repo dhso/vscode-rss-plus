@@ -2,8 +2,9 @@ import * as vscode from 'vscode';
 import { Collection } from './collection';
 import { LocalCollection } from './local_collection';
 import { TTRSSCollection } from './ttrss_collection';
+import { FRESHRSSCollection } from './freshrss_collection';
 import { join as pathJoin } from 'path';
-import { readFile, TTRSSApiURL, walkFeedTree, writeFile } from './utils';
+import { readFile, TTRSSApiURL, walkFeedTree, writeFile, FRESHRSSApiURL, FRESHRSSApiKey } from './utils';
 import { AccountList, Account } from './account';
 import { FeedList, Feed } from './feeds';
 import { ArticleList, Article } from './articles';
@@ -59,6 +60,9 @@ export class App {
                 case 'inoreader':
                     c = new InoreaderCollection(dir, key);
                     break;
+                case 'freshrss':
+                    c = new FRESHRSSCollection(dir, key);
+                    break;
                 default:
                     throw new Error(`Unknown account type: ${account.type}`);
             }
@@ -93,6 +97,20 @@ export class App {
             server,
             username,
             password,
+        };
+        await App.cfg.update('accounts', accounts, true);
+    }
+
+    private async createFRESHRSSAccount(name: string, server: string, username: string, password: string) {
+        const accounts = App.cfg.get<any>('accounts');
+        const api_key = FRESHRSSApiKey(username, password);
+        accounts[uuid.v1()] = {
+            name: name,
+            type: 'freshrss',
+            server,
+            username,
+            password,
+            api_key,
         };
         await App.cfg.update('accounts', accounts, true);
     }
@@ -134,7 +152,7 @@ export class App {
     }
 
     static get cfg() {
-        return vscode.workspace.getConfiguration('rss');
+        return vscode.workspace.getConfiguration('rss-plus');
     }
 
     public static readonly ACCOUNT = 1;
@@ -177,39 +195,39 @@ export class App {
     }
 
     initViews() {
-        vscode.window.registerTreeDataProvider('rss-accounts', this.account_list);
-        vscode.window.registerTreeDataProvider('rss-feeds', this.feed_list);
-        vscode.window.registerTreeDataProvider('rss-articles', this.article_list);
-        vscode.window.registerTreeDataProvider('rss-favorites', this.favorites_list);
+        vscode.window.registerTreeDataProvider('rss-plus-accounts', this.account_list);
+        vscode.window.registerTreeDataProvider('rss-plus-feeds', this.feed_list);
+        vscode.window.registerTreeDataProvider('rss-plus-articles', this.article_list);
+        vscode.window.registerTreeDataProvider('rss-plus-favorites', this.favorites_list);
         this.status_bar.init();
     }
 
     initCommands() {
         const commands: [string, (...args: any[]) => any][] = [
-            ['rss.select', this.rss_select],
-            ['rss.articles', this.rss_articles],
-            ['rss.read', this.rss_read],
-            ['rss.mark-read', this.rss_mark_read],
-            ['rss.mark-unread', this.rss_mark_unread],
-            ['rss.mark-all-read', this.rss_mark_all_read],
-            ['rss.mark-account-read', this.rss_mark_account_read],
-            ['rss.refresh', this.rss_refresh],
-            ['rss.refresh-account', this.rss_refresh_account],
-            ['rss.refresh-one', this.rss_refresh_one],
-            ['rss.open-website', this.rss_open_website],
-            ['rss.open-link', this.rss_open_link],
-            ['rss.add-feed', this.rss_add_feed],
-            ['rss.remove-feed', this.rss_remove_feed],
-            ['rss.add-to-favorites', this.rss_add_to_favorites],
-            ['rss.remove-from-favorites', this.rss_remove_from_favorites],
-            ['rss.new-account', this.rss_new_account],
-            ['rss.del-account', this.rss_del_account],
-            ['rss.account-rename', this.rss_account_rename],
-            ['rss.account-modify', this.rss_account_modify],
-            ['rss.export-to-opml', this.rss_export_to_opml],
-            ['rss.import-from-opml', this.rss_import_from_opml],
-            ['rss.clean-old-articles', this.rss_clean_old_articles],
-            ['rss.clean-all-old-articles', this.rss_clean_all_old_articles],
+            ['rss-plus.select', this.rss_select],
+            ['rss-plus.articles', this.rss_articles],
+            ['rss-plus.read', this.rss_read],
+            ['rss-plus.mark-read', this.rss_mark_read],
+            ['rss-plus.mark-unread', this.rss_mark_unread],
+            ['rss-plus.mark-all-read', this.rss_mark_all_read],
+            ['rss-plus.mark-account-read', this.rss_mark_account_read],
+            ['rss-plus.refresh', this.rss_refresh],
+            ['rss-plus.refresh-account', this.rss_refresh_account],
+            ['rss-plus.refresh-one', this.rss_refresh_one],
+            ['rss-plus.open-website', this.rss_open_website],
+            ['rss-plus.open-link', this.rss_open_link],
+            ['rss-plus.add-feed', this.rss_add_feed],
+            ['rss-plus.remove-feed', this.rss_remove_feed],
+            ['rss-plus.add-to-favorites', this.rss_add_to_favorites],
+            ['rss-plus.remove-from-favorites', this.rss_remove_from_favorites],
+            ['rss-plus.new-account', this.rss_new_account],
+            ['rss-plus.del-account', this.rss_del_account],
+            ['rss-plus.account-rename', this.rss_account_rename],
+            ['rss-plus.account-modify', this.rss_account_modify],
+            ['rss-plus.export-to-opml', this.rss_export_to_opml],
+            ['rss-plus.import-from-opml', this.rss_import_from_opml],
+            ['rss-plus.clean-old-articles', this.rss_clean_old_articles],
+            ['rss-plus.clean-all-old-articles', this.rss_clean_all_old_articles],
         ];
 
         for (const [cmd, handler] of commands) {
@@ -443,7 +461,7 @@ export class App {
 
     async rss_new_account() {
         const type = await vscode.window.showQuickPick(
-            ['local', 'ttrss', 'inoreader'],
+            ['local', 'ttrss', 'freshrss', 'inoreader'],
             {placeHolder: "Select account type"}
         );
         if (type === undefined) {return;}
@@ -460,6 +478,14 @@ export class App {
             const password = await vscode.window.showInputBox({prompt: 'Enter password', password: true});
             if (password === undefined || password.length <= 0) {return;}
             await this.createTTRSSAccount(name, TTRSSApiURL(url), username, password);
+        } else if (type === 'freshrss') {
+            const url = await vscode.window.showInputBox({prompt: 'Enter server URL(SELF_URL_PATH)'});
+            if (url === undefined || url.length <= 0) {return;}
+            const username = await vscode.window.showInputBox({prompt: 'Enter user name'});
+            if (username === undefined || username.length <= 0) {return;}
+            const password = await vscode.window.showInputBox({prompt: 'Enter password', password: true});
+            if (password === undefined || password.length <= 0) {return;}
+            await this.createFRESHRSSAccount(name, FRESHRSSApiURL(url), username, password);
         } else if (type === 'inoreader') {
             const custom = await vscode.window.showQuickPick(
                 ['no', 'yes'],
@@ -516,6 +542,27 @@ export class App {
             if (password === undefined || password.length <= 0) {return;}
 
             cfg.server = TTRSSApiURL(url);
+            cfg.username = username;
+            cfg.password = password;
+        } else if (account.type === 'freshrss') {
+            const cfg = accounts[account.key] as FRESHRSSAccount;
+
+            const url = await vscode.window.showInputBox({
+                prompt: 'Enter server URL(SELF_URL_PATH)',
+                value: cfg.server.substr(0, cfg.server.length - 4)
+            });
+            if (url === undefined || url.length <= 0) {return;}
+            const username = await vscode.window.showInputBox({
+                prompt: 'Enter user name', value: cfg.username
+            });
+            if (username === undefined || username.length <= 0) {return;}
+            const password = await vscode.window.showInputBox({
+                prompt: 'Enter password', password: true, value: cfg.password
+            });
+            if (password === undefined || password.length <= 0) {return;}
+
+            cfg.server = FRESHRSSApiURL(url);
+            cfg.api_key = FRESHRSSApiKey(username, password);
             cfg.username = username;
             cfg.password = password;
         } else if (account.type === 'inoreader') {
@@ -621,20 +668,20 @@ export class App {
     }
 
     initEvents() {
-        const do_refresh = () => vscode.commands.executeCommand('rss.refresh', true);
+        const do_refresh = () => vscode.commands.executeCommand('rss-plus.refresh', true);
         let timer = setInterval(do_refresh, App.cfg.interval * 1000);
 
         const disposable = vscode.workspace.onDidChangeConfiguration(async (e) => {
-            if (e.affectsConfiguration('rss.interval')) {
+            if (e.affectsConfiguration('rss-plus.interval')) {
                 clearInterval(timer);
                 timer = setInterval(do_refresh, App.cfg.interval * 1000);
             }
 
-            if (e.affectsConfiguration('rss.status-bar-notify') || e.affectsConfiguration('rss.status-bar-update')) {
+            if (e.affectsConfiguration('rss-plus.status-bar-notify') || e.affectsConfiguration('rss-plus.status-bar-update')) {
                 this.refreshLists(App.STATUS_BAR);
             }
 
-            if (e.affectsConfiguration('rss.accounts') && !this.updating) {
+            if (e.affectsConfiguration('rss-plus.accounts') && !this.updating) {
                 this.updating = true;
                 await vscode.window.withProgress({
                     location: vscode.ProgressLocation.Notification,
@@ -648,7 +695,7 @@ export class App {
                 });
             }
 
-            if (e.affectsConfiguration('rss.storage-path')) {
+            if (e.affectsConfiguration('rss-plus.storage-path')) {
                 const res = await vscode.window.showInformationMessage("Reload vscode to take effect", "Reload");
                 if (res === "Reload") {
                     vscode.commands.executeCommand("workbench.action.reloadWindow");

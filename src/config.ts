@@ -1,6 +1,6 @@
 interface Account {
     name: string;
-    type: 'local' | 'ttrss';
+    type: 'local' | 'ttrss' | 'freshrss';
 }
 
 type FeedTree = (string | Category)[];
@@ -24,4 +24,11 @@ interface TTRSSAccount extends Account {
 interface InoreaderAccount extends Account {
     appid: string;
     appkey: string;
+}
+
+interface FRESHRSSAccount extends Account {
+    server: string;
+    username: string;
+    password: string;
+    api_key: string;
 }

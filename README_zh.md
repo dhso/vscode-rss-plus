@@ -64,16 +64,16 @@ VSCode-RSS 支持三种类型的账户, 本地账户, TTRSS(Tiny Tiny RSS) 账�
 
 | Name | Type | Description |
 |:-----|:-----|:------------|
-| `rss.accounts` | `object` | 订阅账户, 你可以修改 `name` 字段或者调整列表的顺序, 但是**千万不要**修改键值和 `type` 字段. |
-| `rss.interval` | `integer` | 自动刷新的时间间隔 (秒) |
-| `rss.timeout` | `integer` | 请求超时时间 (秒) |
-| `rss.retry` | `integer` | 请求重试次数 |
-| `rss.fetch-unread-only` | `boolean` | 对于 TTRSS 和 Inoreader, 是否仅获取未读文章 |
-| `rss.status-bar-notify` | `boolean` | 是否在状态栏显示滚动通知 |
-| `rss.status-bar-update` | `integer` | 滚动通知刷新间隔 (秒) |
-| `rss.status-bar-length` | `integer` | 状态栏中显示的通知的最大长度 |
-| `rss.storage-path` | `string` | 数据存储路径, 必须是绝对路径 |
-| `rss.inoreader-domain` | `string` | Inoreader 的域名 |
-| `rss.inoreader-limit` | `string` | Inoreader 单次获取文章数量的限制 |
+| `rss-plus.accounts` | `object` | 订阅账户, 你可以修改 `name` 字段或者调整列表的顺序, 但是**千万不要**修改键值和 `type` 字段. |
+| `rss-plus.interval` | `integer` | 自动刷新的时间间隔 (秒) |
+| `rss-plus.timeout` | `integer` | 请求超时时间 (秒) |
+| `rss-plus.retry` | `integer` | 请求重试次数 |
+| `rss-plus.fetch-unread-only` | `boolean` | 对于 TTRSS 和 Inoreader, 是否仅获取未读文章 |
+| `rss-plus.status-bar-notify` | `boolean` | 是否在状态栏显示滚动通知 |
+| `rss-plus.status-bar-update` | `integer` | 滚动通知刷新间隔 (秒) |
+| `rss-plus.status-bar-length` | `integer` | 状态栏中显示的通知的最大长度 |
+| `rss-plus.storage-path` | `string` | 数据存储路径, 必须是绝对路径 |
+| `rss-plus.inoreader-domain` | `string` | Inoreader 的域名 |
+| `rss-plus.inoreader-limit` | `string` | Inoreader 单次获取文章数量的限制 |
 
 Enjoy it!

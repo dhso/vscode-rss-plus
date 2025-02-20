@@ -8,7 +8,7 @@ import * as crypto from 'crypto';
 
 export async function checkStoragePath(context: vscode.ExtensionContext): Promise<string> {
     const old = context.globalState.get<string>('root', context.globalStoragePath);
-    const cfg = vscode.workspace.getConfiguration('rss');
+    const cfg = vscode.workspace.getConfiguration('rss-plus');
     const root = cfg.get<string>('storage-path') || context.globalStoragePath;
     if (old !== root) {
         if (!isAbsolute(root)) {
@@ -88,7 +88,7 @@ const alter: {[v: string]: (context: vscode.ExtensionContext, root: string) => P
             title: 'Migrating data for the new version...',
             cancellable: false
         }, async () => {
-            const cfg = vscode.workspace.getConfiguration('rss');
+            const cfg = vscode.workspace.getConfiguration('rss-plus');
             await checkDir(root);
             const summaries: {[url: string]: Summary} = {};
             const abstracts: {[link: string]: Abstract} = {};
@@ -116,7 +116,7 @@ const alter: {[v: string]: (context: vscode.ExtensionContext, root: string) => P
     '0.4.0': async (context, root) => {
         await checkDir(root);
 
-        const cfg = vscode.workspace.getConfiguration('rss');
+        const cfg = vscode.workspace.getConfiguration('rss-plus');
         const key = uuid.v1();
         await cfg.update('accounts', {
             [key]: {
@@ -157,7 +157,7 @@ const alter: {[v: string]: (context: vscode.ExtensionContext, root: string) => P
     '0.7.0': async (context, root) => {
         await checkDir(root);
 
-        const cfg = vscode.workspace.getConfiguration('rss');
+        const cfg = vscode.workspace.getConfiguration('rss-plus');
         for (const key in cfg.accounts) {
             const dir = pathJoin(root, key);
             await checkDir(dir);
@@ -187,7 +187,7 @@ const alter: {[v: string]: (context: vscode.ExtensionContext, root: string) => P
     '0.7.1': async (context, root) => {
         await checkDir(root);
 
-        const cfg = vscode.workspace.getConfiguration('rss');
+        const cfg = vscode.workspace.getConfiguration('rss-plus');
         for (const key in cfg.accounts) {
             if (cfg.accounts[key].type === 'local') {
                 const dir = pathJoin(root, key);

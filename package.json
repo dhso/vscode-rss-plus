@@ -1,12 +1,12 @@
 {
-    "name": "rss",
-    "displayName": "RSS",
+    "name": "rss-plus",
+    "displayName": "RSS Plus",
     "description": "An RSS reader embedded in Visual Studio Code",
     "license": "MIT",
     "icon": "logo.png",
     "version": "0.10.4",
-    "publisher": "luyuhuang",
-    "author": "luyuhuang",
+    "publisher": "dhso",
+    "author": "luyuhuang & dhso",
     "homepage": "https://github.com/luyuhuang/vscode-rss.git",
     "repository": {
         "type": "git",
@@ -25,65 +25,65 @@
         "reader"
     ],
     "activationEvents": [
-        "onView:rss-feeds",
-        "onView:rss-articles"
+        "onView:rss-plus-feeds",
+        "onView:rss-plus-articles"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "configuration": {
-            "title": "RSS",
+            "title": "RSS Plus",
             "properties": {
-                "rss.accounts": {
+                "rss-plus.accounts": {
                     "type": "object",
                     "default": {},
                     "description": "Feed accounts"
                 },
-                "rss.interval": {
+                "rss-plus.interval": {
                     "type": "integer",
                     "default": 3600,
                     "description": "Refresh interval(s)"
                 },
-                "rss.timeout": {
+                "rss-plus.timeout": {
                     "type": "integer",
                     "default": 15,
                     "description": "Request timeout(s)"
                 },
-                "rss.retry": {
+                "rss-plus.retry": {
                     "type": "integer",
                     "default": 1,
                     "description": "Request retries"
                 },
-                "rss.fetch-unread-only": {
+                "rss-plus.fetch-unread-only": {
                     "type": "boolean",
                     "default": false,
                     "description": "Fetch unread articles only, for TTRSS and Inoreader"
                 },
-                "rss.status-bar-length": {
+                "rss-plus.status-bar-length": {
                     "type": "number",
                     "default": 20,
                     "description": "Max length displayed in status bar"
                 },
-                "rss.status-bar-notify": {
+                "rss-plus.status-bar-notify": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to show notification in status bar"
                 },
-                "rss.status-bar-update": {
+                "rss-plus.status-bar-update": {
                     "type": "number",
                     "default": 5,
                     "description": "Notification update interval(s)"
                 },
-                "rss.storage-path": {
+                "rss-plus.storage-path": {
                     "type": "string",
                     "default": null,
                     "description": "Data storage path"
                 },
-                "rss.inoreader-domain": {
+                "rss-plus.inoreader-domain": {
                     "type": "string",
                     "default": "www.inoreader.com",
                     "description": "Domain of Inoreader"
                 },
-                "rss.inoreader-limit": {
+                "rss-plus.inoreader-limit": {
                     "type": "integer",
                     "default": 100,
                     "minimum": 1,
@@ -94,141 +94,141 @@
         },
         "commands": [
             {
-                "command": "rss.select",
+                "command": "rss-plus.select",
                 "title": "Select"
             },
             {
-                "command": "rss.new-account",
+                "command": "rss-plus.new-account",
                 "title": "New account",
                 "icon": "$(add)"
             },
             {
-                "command": "rss.del-account",
+                "command": "rss-plus.del-account",
                 "title": "Delete"
             },
             {
-                "command": "rss.account-rename",
+                "command": "rss-plus.account-rename",
                 "title": "Rename"
             },
             {
-                "command": "rss.account-modify",
+                "command": "rss-plus.account-modify",
                 "title": "Modify"
             },
             {
-                "command": "rss.articles",
+                "command": "rss-plus.articles",
                 "title": "Articles"
             },
             {
-                "command": "rss.read",
+                "command": "rss-plus.read",
                 "title": "Read"
             },
             {
-                "command": "rss.read-notification",
+                "command": "rss-plus.read-notification",
                 "title": "Read from notification"
             },
             {
-                "command": "rss.refresh",
+                "command": "rss-plus.refresh",
                 "title": "Refresh",
                 "icon": "$(refresh)"
             },
             {
-                "command": "rss.refresh-account",
+                "command": "rss-plus.refresh-account",
                 "title": "Refresh",
                 "icon": "$(refresh)"
             },
             {
-                "command": "rss.refresh-one",
+                "command": "rss-plus.refresh-one",
                 "title": "Refresh",
                 "icon": "$(refresh)"
             },
             {
-                "command": "rss.open-website",
+                "command": "rss-plus.open-website",
                 "title": "Open website"
             },
             {
-                "command": "rss.open-link",
+                "command": "rss-plus.open-link",
                 "title": "Open link",
                 "icon": "$(globe)"
             },
             {
-                "command": "rss.mark-read",
+                "command": "rss-plus.mark-read",
                 "title": "Mark as read",
                 "icon": "$(check)"
             },
             {
-                "command": "rss.mark-unread",
+                "command": "rss-plus.mark-unread",
                 "title": "Mark as unread"
             },
             {
-                "command": "rss.mark-all-read",
+                "command": "rss-plus.mark-all-read",
                 "title": "Mark all as read",
                 "icon": "$(check)"
             },
             {
-                "command": "rss.mark-account-read",
+                "command": "rss-plus.mark-account-read",
                 "title": "Mark all as read",
                 "icon": "$(check)"
             },
             {
-                "command": "rss.add-feed",
+                "command": "rss-plus.add-feed",
                 "title": "Add feed",
                 "icon": "$(add)"
             },
             {
-                "command": "rss.remove-feed",
+                "command": "rss-plus.remove-feed",
                 "title": "Remove"
             },
             {
-                "command": "rss.add-to-favorites",
+                "command": "rss-plus.add-to-favorites",
                 "title": "Add to favorites",
                 "icon": "$(star-empty)"
             },
             {
-                "command": "rss.remove-from-favorites",
+                "command": "rss-plus.remove-from-favorites",
                 "title": "Remove from favorites"
             },
             {
-                "command": "rss.export-to-opml",
+                "command": "rss-plus.export-to-opml",
                 "title": "Export to OPML"
             },
             {
-                "command": "rss.import-from-opml",
+                "command": "rss-plus.import-from-opml",
                 "title": "Import from OPML"
             },
             {
-                "command": "rss.clean-old-articles",
+                "command": "rss-plus.clean-old-articles",
                 "title": "Clean old articles"
             },
             {
-                "command": "rss.clean-all-old-articles",
+                "command": "rss-plus.clean-all-old-articles",
                 "title": "Clean old articles"
             }
         ],
         "viewsContainers": {
             "activitybar": [
                 {
-                    "id": "rss-reader",
-                    "title": "RSS Reader",
+                    "id": "rss-plus-reader",
+                    "title": "RSS Reader Plus",
                     "icon": "resources/rss.svg"
                 }
             ]
         },
         "views": {
-            "rss-reader": [
+            "rss-plus-reader": [
                 {
-                    "id": "rss-accounts",
+                    "id": "rss-plus-accounts",
                     "name": "Accounts"
                 },
                 {
-                    "id": "rss-feeds",
+                    "id": "rss-plus-feeds",
                     "name": "Feeds"
                 },
                 {
-                    "id": "rss-articles",
+                    "id": "rss-plus-articles",
                     "name": "Articles"
                 },
                 {
-                    "id": "rss-favorites",
+                    "id": "rss-plus-favorites",
                     "name": "Favorites"
                 }
             ]
@@ -236,225 +236,225 @@
         "menus": {
             "commandPalette": [
                 {
-                    "command": "rss.select",
+                    "command": "rss-plus.select",
                     "when": "false"
                 },
                 {
-                    "command": "rss.articles",
+                    "command": "rss-plus.articles",
                     "when": "false"
                 },
                 {
-                    "command": "rss.read",
+                    "command": "rss-plus.read",
                     "when": "false"
                 },
                 {
-                    "command": "rss.mark-read",
+                    "command": "rss-plus.mark-read",
                     "when": "false"
                 },
                 {
-                    "command": "rss.mark-unread",
+                    "command": "rss-plus.mark-unread",
                     "when": "false"
                 },
                 {
-                    "command": "rss.mark-all-read",
+                    "command": "rss-plus.mark-all-read",
                     "when": "false"
                 },
                 {
-                    "command": "rss.mark-account-read",
+                    "command": "rss-plus.mark-account-read",
                     "when": "false"
                 },
                 {
-                    "command": "rss.refresh",
+                    "command": "rss-plus.refresh",
                     "when": "false"
                 },
                 {
-                    "command": "rss.refresh-account",
+                    "command": "rss-plus.refresh-account",
                     "when": "false"
                 },
                 {
-                    "command": "rss.refresh-one",
+                    "command": "rss-plus.refresh-one",
                     "when": "false"
                 },
                 {
-                    "command": "rss.open-website",
+                    "command": "rss-plus.open-website",
                     "when": "false"
                 },
                 {
-                    "command": "rss.open-link",
+                    "command": "rss-plus.open-link",
                     "when": "false"
                 },
                 {
-                    "command": "rss.add-feed",
+                    "command": "rss-plus.add-feed",
                     "when": "false"
                 },
                 {
-                    "command": "rss.remove-feed",
+                    "command": "rss-plus.remove-feed",
                     "when": "false"
                 },
                 {
-                    "command": "rss.add-to-favorites",
+                    "command": "rss-plus.add-to-favorites",
                     "when": "false"
                 },
                 {
-                    "command": "rss.remove-from-favorites",
+                    "command": "rss-plus.remove-from-favorites",
                     "when": "false"
                 },
                 {
-                    "command": "rss.new-account",
+                    "command": "rss-plus.new-account",
                     "when": "false"
                 },
                 {
-                    "command": "rss.del-account",
+                    "command": "rss-plus.del-account",
                     "when": "false"
                 },
                 {
-                    "command": "rss.account-rename",
+                    "command": "rss-plus.account-rename",
                     "when": "false"
                 },
                 {
-                    "command": "rss.account-modify",
+                    "command": "rss-plus.account-modify",
                     "when": "false"
                 },
                 {
-                    "command": "rss.export-to-opml",
+                    "command": "rss-plus.export-to-opml",
                     "when": "false"
                 },
                 {
-                    "command": "rss.import-from-opml",
+                    "command": "rss-plus.import-from-opml",
                     "when": "false"
                 },
                 {
-                    "command": "rss.clean-old-articles",
+                    "command": "rss-plus.clean-old-articles",
                     "when": "false"
                 },
                 {
-                    "command": "rss.clean-all-old-articles",
+                    "command": "rss-plus.clean-all-old-articles",
                     "when": "false"
                 }
             ],
             "view/title": [
                 {
-                    "command": "rss.refresh",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.refresh",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.new-account",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.new-account",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.refresh-account",
-                    "when": "view == rss-feeds",
+                    "command": "rss-plus.refresh-account",
+                    "when": "view == rss-plus-feeds",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.add-feed",
-                    "when": "view == rss-feeds",
+                    "command": "rss-plus.add-feed",
+                    "when": "view == rss-plus-feeds",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.mark-account-read",
-                    "when": "view == rss-feeds",
+                    "command": "rss-plus.mark-account-read",
+                    "when": "view == rss-plus-feeds",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.refresh-one",
-                    "when": "view == rss-articles",
+                    "command": "rss-plus.refresh-one",
+                    "when": "view == rss-plus-articles",
                     "group": "navigation"
                 },
                 {
-                    "command": "rss.mark-all-read",
-                    "when": "view == rss-articles",
+                    "command": "rss-plus.mark-all-read",
+                    "when": "view == rss-plus-articles",
                     "group": "navigation"
                 }
             ],
             "view/item/context": [
                 {
-                    "command": "rss.refresh-account",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.refresh-account",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation@1"
                 },
                 {
-                    "command": "rss.mark-account-read",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.mark-account-read",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation@2"
                 },
                 {
-                    "command": "rss.account-rename",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.account-rename",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation@3"
                 },
                 {
-                    "command": "rss.account-modify",
-                    "when": "view == rss-accounts && viewItem != local",
+                    "command": "rss-plus.account-modify",
+                    "when": "view == rss-plus-accounts && viewItem != local",
                     "group": "navigation@4"
                 },
                 {
-                    "command": "rss.export-to-opml",
-                    "when": "view == rss-accounts && viewItem == local",
+                    "command": "rss-plus.export-to-opml",
+                    "when": "view == rss-plus-accounts && viewItem == local",
                     "group": "navigation@5"
                 },
                 {
-                    "command": "rss.import-from-opml",
-                    "when": "view == rss-accounts && viewItem == local",
+                    "command": "rss-plus.import-from-opml",
+                    "when": "view == rss-plus-accounts && viewItem == local",
                     "group": "navigation@6"
                 },
                 {
-                    "command": "rss.clean-all-old-articles",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.clean-all-old-articles",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation@8"
                 },
                 {
-                    "command": "rss.del-account",
-                    "when": "view == rss-accounts",
+                    "command": "rss-plus.del-account",
+                    "when": "view == rss-plus-accounts",
                     "group": "navigation@9"
                 },
                 {
-                    "command": "rss.open-link",
+                    "command": "rss-plus.open-link",
                     "when": "viewItem == article",
                     "group": "inline"
                 },
                 {
-                    "command": "rss.mark-read",
-                    "when": "view == rss-articles",
+                    "command": "rss-plus.mark-read",
+                    "when": "view == rss-plus-articles",
                     "group": "inline"
                 },
                 {
-                    "command": "rss.mark-unread",
-                    "when": "view == rss-articles"
+                    "command": "rss-plus.mark-unread",
+                    "when": "view == rss-plus-articles"
                 },
                 {
-                    "command": "rss.add-to-favorites",
-                    "when": "view == rss-articles",
+                    "command": "rss-plus.add-to-favorites",
+                    "when": "view == rss-plus-articles",
                     "group": "inline"
                 },
                 {
-                    "command": "rss.remove-from-favorites",
-                    "when": "view == rss-favorites && viewItem == article"
+                    "command": "rss-plus.remove-from-favorites",
+                    "when": "view == rss-plus-favorites && viewItem == article"
                 },
                 {
-                    "command": "rss.refresh-one",
+                    "command": "rss-plus.refresh-one",
                     "when": "viewItem == feed",
                     "group": "navigation@1"
                 },
                 {
-                    "command": "rss.mark-all-read",
+                    "command": "rss-plus.mark-all-read",
                     "when": "viewItem == feed",
                     "group": "navigation@2"
                 },
                 {
-                    "command": "rss.open-website",
+                    "command": "rss-plus.open-website",
                     "when": "viewItem == feed",
                     "group": "navigation@3"
                 },
                 {
-                    "command": "rss.clean-old-articles",
+                    "command": "rss-plus.clean-old-articles",
                     "when": "viewItem == feed",
                     "group": "navigation@4"
                 },
                 {
-                    "command": "rss.remove-feed",
+                    "command": "rss-plus.remove-feed",
                     "when": "viewItem == feed",
                     "group": "navigation@5"
                 }
@@ -492,7 +492,7 @@
         "cheerio": "1.0.0-rc.10",
         "fast-xml-parser": "^4.4.1",
         "fs-extra": "^9.0.1",
-        "got": "12.5.3",
+        "got": "11.8.3",
         "he": "^1.2.0",
         "iconv-lite": "^0.5.1",
         "uuid": "^8.0.0"

@@ -64,16 +64,16 @@ You can modify the configuration as needed.
 
 | Name | Type | Description |
 |:-----|:-----|:------------|
-| `rss.accounts` | `object` | Feed accounts, you can modify `name` field or adjust the order of the lists if you want, but **NEVER** modify the key and `type` field. |
-| `rss.interval` | `integer` | Automatic refresh interval (s) |
-| `rss.timeout` | `integer` | Request timeout (s) |
-| `rss.retry` | `integer` | Request retries |
-| `rss.fetch-unread-only` | `boolean` | Whether to fetch unread articles only, for TTRSS and Inoreader |
-| `rss.status-bar-notify` | `boolean` | Whether to show scrolling notification in status bar |
-| `rss.status-bar-update` | `integer` | Scrolling notification update interval(s) |
-| `rss.status-bar-length` | `integer` | Max length of notification displayed in status bar |
-| `rss.storage-path` | `string` | Data storage path, must be an absolute path |
-| `rss.inoreader-domain` | `string` | Domain of Inoreader |
-| `rss.inoreader-limit` | `string` | Limit of the number of articles fetched by Inoreader at a time |
+| `rss-plus.accounts` | `object` | Feed accounts, you can modify `name` field or adjust the order of the lists if you want, but **NEVER** modify the key and `type` field. |
+| `rss-plus.interval` | `integer` | Automatic refresh interval (s) |
+| `rss-plus.timeout` | `integer` | Request timeout (s) |
+| `rss-plus.retry` | `integer` | Request retries |
+| `rss-plus.fetch-unread-only` | `boolean` | Whether to fetch unread articles only, for TTRSS and Inoreader |
+| `rss-plus.status-bar-notify` | `boolean` | Whether to show scrolling notification in status bar |
+| `rss-plus.status-bar-update` | `integer` | Scrolling notification update interval(s) |
+| `rss-plus.status-bar-length` | `integer` | Max length of notification displayed in status bar |
+| `rss-plus.storage-path` | `string` | Data storage path, must be an absolute path |
+| `rss-plus.inoreader-domain` | `string` | Domain of Inoreader |
+| `rss-plus.inoreader-limit` | `string` | Limit of the number of articles fetched by Inoreader at a time |
 
 Enjoy it!

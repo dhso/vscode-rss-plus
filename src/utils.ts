@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as fse from 'fs-extra';
 import * as tls from 'tls';
+import * as crypto from 'crypto';
 import got_ from 'got';
 
 export const got = got_.extend({https: {certificateAuthority: [...tls.rootCertificates]}});
@@ -79,6 +80,15 @@ export function isDirEmpty(path: string): Promise<boolean> {
 
 export function TTRSSApiURL(server_url: string) {
     return server_url.endsWith('/') ? server_url + 'api/' : server_url + '/api/';
+}
+
+export function FRESHRSSApiURL(server_url: string) {
+    return server_url.endsWith('/') ? server_url + 'api/fever.php?api' : server_url + '/api/fever.php?api';
+}
+
+export function FRESHRSSApiKey(username: string, password: string) {
+    // api_key=`echo -n "kevin:freshrss" | md5sum | cut -d' ' -f1`
+    return  crypto.createHash('md5').update(`${username}:${password}`).digest('hex');
 }
 
 export function *walkFeedTree(tree: FeedTree): Generator<string> {
