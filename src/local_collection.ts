@@ -114,7 +114,7 @@ export class LocalCollection extends Collection {
                 if (Array.isArray(etag)) {
                     etag = etag[0];
                 }
-                this.etags.set(url, etag);
+                this.etags.set(url, etag!);
             }
             const [e, s] = parseXML2(res.body);
             entries = e;

@@ -201,15 +201,16 @@ function parseEntry(dom: any, baseURL: string, exclude: Set<string>): Entry | un
 export function parseXML(xml: string, exclude: Set<string>): [Entry[], Summary] {
     const match = xml.match(/<\?xml.*encoding="(\S+)".*\?>/);
     xml = iconv.decode(Buffer.from(xml, 'binary'), match ? match[1]: 'utf-8');
-    const dom = parser.parse(xml, {
+    const xmlParser = new parser.XMLParser({
         attributeNamePrefix: "",
-        attrNodeName: "__attr",
+        // attrNodeName: "__attr",
         textNodeName: "__text",
-        cdataTagName: "__cdata",
-        cdataPositionChar: "",
+        // cdataTagName: "__cdata",
+        // cdataPositionChar: "",
         ignoreAttributes: false,
         parseAttributeValue: true,
     });
+    const dom = xmlParser.parse(xml);
     let feed;
     if (dom.rss) {
         if (dom.rss.channel) {
