@@ -7,10 +7,10 @@
     "version": "1.0.1",
     "publisher": "dhso",
     "author": "luyuhuang & dhso",
-    "homepage": "https://github.com/luyuhuang/vscode-rss.git",
+    "homepage": "https://github.com/dhso/vscode-rss-plus.git",
     "repository": {
         "type": "git",
-        "url": "https://github.com/luyuhuang/vscode-rss.git"
+        "url": "https://github.com/dhso/vscode-rss-plus.git"
     },
     "engines": {
         "vscode": "^1.40.0"
