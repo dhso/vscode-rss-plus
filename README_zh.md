@@ -1,4 +1,6 @@
-# VSCode-RSS
+# VSCode-RSS Plus
+
+增强版本的vscode-rss插件，额外支持了 FreshRSS API。
 
 嵌入在 Visual Studio Code 中的 RSS 阅读器
 
@@ -17,6 +19,7 @@ VSCode-RSS 是一个 Visual Studio Code 扩展, 它提供了一个嵌入式的 R
 
 - [x] 多账户;
 - [x] 支持 Tiny Tiny RSS;
+- [x] 支持 Fresh RSS;
 - [x] 支持 Inoreader;
 - [x] 支持多种 RSS 格式;
 - [x] 自动更新;
@@ -39,6 +42,10 @@ VSCode-RSS 支持三种类型的账户, 本地账户, TTRSS(Tiny Tiny RSS) 账�
 对于 TTRSS 账户, 它会从 Tiny Tiny RSS 服务器上获取数据并且与服务器同步阅读记录, 因此它会与其他客户端 (例如你 Mac 上的 Reeder 或者是你手机上的 FeedMe) 有着同样的数据. 如果你不了解 TTRSS, 见 [https://tt-rss.org/](https://tt-rss.org/). 要创建一个 ttrss 账户, 点击 "ACCOUNTS" 面板上的 "+" 按钮并选择 "ttrss" 选项, 然后输入账户名, 服务器地址, 用户名和密码. 账户名仅用于显示, 服务器地址, 用户名和密码则取决于你的 TTRSS 服务器.
 
 ![demonstrate2](https://s1.ax1x.com/2020/05/20/YoIWvR.gif)
+
+#### FreshRSS 账户
+
+对于 FreshRSS 账户, 它会从 FreshRSS 服务器上获取数据并且与服务器同步阅读记录, 因此它会与其他客户端 (例如你 Mac 上的 NetNewsWire 或者是你手机上的 FeedMe) 有着同样的数据. 如果你不了解 FreshRSS, 见 [https://freshrss.org/](https://freshrss.org/). 要创建一个 freshrss 账户, 点击 "ACCOUNTS" 面板上的 "+" 按钮并选择 "freshrss" 选项, 然后输入账户名, 服务器地址, 用户名和密码. 账户名仅用于显示, 服务器地址, 用户名和密码则取决于你的 FreshRSS 服务器.
 
 #### Inoreader 账户
 

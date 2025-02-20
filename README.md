@@ -1,5 +1,7 @@
 # VSCode-RSS
 
+The enhanced version of the VSCode RSS plugin additionally supports the FreshRSS API.
+
 An RSS reader embedded in Visual Studio Code
 
 [![version](https://vsmarketplacebadge.apphb.com/version-short/luyuhuang.rss.svg)](https://marketplace.visualstudio.com/items?itemName=luyuhuang.rss)
@@ -13,10 +15,11 @@ An RSS reader embedded in Visual Studio Code
 
 ## Introduction
 
-VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reader. With it, you can read news and blog freely in VSCode after a long time of coding. [Tiny Tiny RSS](https://tt-rss.org/) and [Inoreader](https://inoreader.com) are supported, which allows you to sync RSS between devices. VSCode-RSS is easy to use and requires little to manually modify the configuration.
+VSCode-RSS is a Visual Studio Code extension that provides an embedded RSS reader. With it, you can read news and blog freely in VSCode after a long time of coding. [Tiny Tiny RSS](https://tt-rss.org/)、[Fresh RSS](https://freshrss.org/) and [Inoreader](https://inoreader.com) are supported, which allows you to sync RSS between devices. VSCode-RSS is easy to use and requires little to manually modify the configuration.
 
 - [x] Multiple accounts;
 - [x] Support Tiny Tiny RSS;
+- [x] Support Fresh RSS;
 - [x] Support Inoreader;
 - [x] Support multiple RSS formats;
 - [x] Automatic update;
@@ -39,6 +42,10 @@ For local account, it will store the data locally. Click the "+" button on the "
 For TTRSS account, it will fetch data from Tiny Tiny RSS server and synchronize reading records with the server, so it has the same data as other clients(such as Reeder on your Mac or FeedMe on your phone). If you don't know TTRSS, see [https://tt-rss.org/](https://tt-rss.org/) for more information. To create a TTRSS account, click the "+" button on the "ACCOUNTS" view and select "ttrss" option, and then enter the account name, server address, username and password. Account name is just for display, while server address, username and password depends on your TTRSS server.
 
 ![demonstrate2](https://s1.ax1x.com/2020/05/20/YoIWvR.gif)
+
+#### FreshRSS Account
+
+For FreshRSS account, it will fetch data from the FreshRSS server and synchronize reading records with the server, so it has the same data as other clients (such as NetNewsWire on your Mac or FeedMe on your phone). If you don't know FreshRSS, see [https://freshrss.org/](https://freshrss.org/) for more information. To create a FreshRSS account, click the "+" button on the "ACCOUNTS" view and select the "freshrss" option, then enter the account name, server address, username, and password. The account name is just for display, while the server address, username, and password depend on your FreshRSS server.
 
 #### Inoreader Account
 
