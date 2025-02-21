@@ -16,6 +16,8 @@ import { Collection } from './collection';
 // https://freshrss.example.net/api/fever.php?api&groups
 // https://freshrss.example.net/api/fever.php?api&unread_item_ids
 // https://freshrss.example.net/api/fever.php?api&saved_item_ids
+// since_id: 0;从最旧的开始向上
+// max_id: Number.MAX_SAFE_INTEGER; 9007199254740991 从最新的开始向下
 // https://freshrss.example.net/api/fever.php?api&items&since_id=some_id
 // https://freshrss.example.net/api/fever.php?api&items&max_id=some_id
 // https://freshrss.example.net/api/fever.php?api&items&with_ids=some_id
@@ -231,9 +233,18 @@ export class FRESHRSSCollection extends Collection {
         if (!update && summary.ok) {
             return;
         }
+        let offsetKey = 'max_id';
+        let offsetId = Number.MAX_SAFE_INTEGER;
+        if (summary.catelog.length > 0) {
+            offsetKey = 'since_id';
+            offsetId = Number(summary.catelog[0]);
+        }
 
-        const response = await this.request(`items&feed_ids=${summary.custom_data}`);
+        const response = await this.request(`items&feed_ids=${summary.custom_data}&${offsetKey}=${offsetId}`);
         const items = response.items as IFeedItem[];
+        if (items.length <= 0) {
+            return;
+        }
         const abstracts: Abstract[] = [];
         const ids = new Set<string>();
         for (const item of items) {
@@ -251,19 +262,6 @@ export class FRESHRSSCollection extends Collection {
             ids.add(abstract.id);
             this.updateAbstract(abstract.id, abstract);
             this.updateContent(abstract.id, item.html);
-        }
-
-        for (const id of summary.catelog) {
-            if (!ids.has(id)) {
-                const abstract = this.getAbstract(id);
-                if (abstract) {
-                    if (!abstract.read) {
-                        abstract.read = true;
-                        this.updateAbstract(abstract.id, abstract);
-                    }
-                    abstracts.push(abstract);
-                }
-            }
         }
 
         abstracts.sort((a, b) => b.date - a.date);

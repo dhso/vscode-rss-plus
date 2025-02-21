@@ -1,4 +1,7 @@
 # Change Log
+## v1.0.3 (2025-02-21)
+
+- update FreshRSS API request handling
 
 ## v0.10.4 (2022-03-26)
 
